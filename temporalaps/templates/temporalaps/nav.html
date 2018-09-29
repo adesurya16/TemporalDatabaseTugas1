@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Temporal Database demo
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+   
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+                <img src="images/logotemporal.png" alt="not found" height="50" width="50">
+              </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Question</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="query.html">Query</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="er.html">ERDiagram</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="relational.html">RModel</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <!-- Page Content -->
+      <div class="row">
+        <div class="col-sm-3">
+            <div class="listOfQuestions">
+                <!-- <h1 class="mt-4">Logo Nav by Start Bootstrap</h1> -->
+                <!-- <p>The logo in the navbar is now a default Bootstrap feature in Bootstrap 4! Make sure to set the width and height of the logo within the HTML or with CSS. For best results, it's recommended that you use an SVG image as your logo.</p> -->
+                    <h5 class="title"> List Pertanyaan Temporal Database</h5>
+                    <div class="list-group"> 
+                        <a href="#" class="list-group-item">
+                            Question-1 Projection
+                        </a>
+                        <a href="#" class="list-group-item active">
+                            Question-2 Selection
+                        </a>
+                        <a href="#" class="list-group-item">
+                            Question-3 Union
+                        </a>
+                        <a href="#" class="list-group-item">
+                            Question-4 Join
+                        </a>
+                        <a href="#" class="list-group-item">
+                            Question-5 Differences
+                        </a>
+                        <a href="#" class="list-group-item">
+                            Question-6 Transaction Timescale
+                        </a>
+                        <a href="#" class="list-group-item">
+                            Question-7 Valid Timeslice
+                        </a>
+                        <a href="#" class="list-group-item">
+                            Question-8 A before B
+                        </a>
+                    </div>
+                </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="container">
+                <div class="questionbox">
+                        <div class="list-group">
+                                <li id="question" class="list-group-item">
+                                    Question : <br>
+                                    Siapa saja anggota IIT yang baru bergabung 5 tahun belakangan ini?
+                                </li>
+                            </div>
+                            <button id="resultbutton" type="button" class="btn btn-primary">See The Result!</button>    
+                </div>
+                <div class="resulttable">
+                        <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>A1</th>
+                                    <th>A2</th>
+                                    <th>A3</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>John</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Mary</td>
+                                    <td>Moe</td>
+                                    <td>mary@example.com</td>
+                                  </tr>
+                                  <tr>
+                                    <td>July</td>
+                                    <td>Dooley</td>
+                                    <td>july@example.com</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                </div>
+            </div>
+        </div>  
+      </div>
+        
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark">
+        <div class="container">
+          <p class="m-1 text-center text-white">Copyright &copy; Temporal Database Demo 2018/2019</p>
+        </div>
+        <!-- /.container -->
+      </footer>
+
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.3.1.slim.min.js"></script>
+</body>
+</html>
+
