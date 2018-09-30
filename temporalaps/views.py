@@ -9,4 +9,16 @@ def index(request):
     context = Context({ "panggilan" : "hai" })
     # return HttpResponse(template.render(context))
     # return render(request, 'temporalaps/index.html')
-    return render(request, 'temporalaps/dev.html')
+    return render(request, 'temporalaps/templates/temporalaps/nav.html')
+
+def showentity(request):
+    return render(request, 'temporalaps/templates/temporalaps/er.html')
+
+def showrelational(request):
+    return render(request, 'temporalaps/templates/temporalaps/relational.html')
+
+def inputquery(request):
+    return render(request, 'temporalaps/templates/temporalaps/query.html')
+
+def showabout(request):
+    return render(request, 'temporalaps/templates/temporalaps/about.html')
