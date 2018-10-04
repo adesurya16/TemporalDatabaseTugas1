@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from temporalaps.models import Client, Anggota, Proyek
 import datetime
 import time
+from datetime import timedelta
 from django.http.response import JsonResponse
 # from rest_framework.response import Response
 
@@ -43,14 +44,24 @@ def answerquestion(request, id):
         return getAnswer1()
     elif id == 2:
         return getAnswer2()
+    elif id == 4:
+        return getAnswer4()
     elif id == 6:
         return getAnswer6()
+    elif id == 8:
+        return getAnswer8()
     elif id == 10:
         return getAnswer10()
+    elif id == 12:
+        return getAnswer12()
     elif id == 14:
         return getAnswer14()
+    elif id == 16:
+        return getAnswer16()
     elif id == 18:
         return getAnswer18()
+    elif id == 20:
+        return getAnswer20()
     else:
         return JsonResponse([])
 
@@ -89,9 +100,35 @@ def getAnswer2():
                 ans.append({"Organisasi" : org.Organisasi, "Valid_time_start" : org.Valid_time_start, "Valid_time_end" : org.Valid_time_end})   
     return JsonResponse({ "data" : ans })
 
+def getAnswer4():
+    save = []
+    ans = []
+    objectsOfProyek = Proyek.objects.all()
+    datenow = datetime.date.today()
+    for obj in objectsOfProyek:
+        if datenow > obj.Valid_time_start and datenow < obj.Valid_time_end:
+            org = obj.Id_iit
+            if not org.Nama in save:
+                save.append(org.Nama)
+                ans.append({"Nama Anggota IIT" : org.Nama, "Nama Proyek": obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})   
+    print(ans)
+    return JsonResponse({ "data" : ans })
+
 def getAnswer6():
     return {}
 
+def getAnswer8():
+    ans = []
+    save = []
+    projectB = Proyek.objects.get(Id_proyek=12)
+    objectAll = Proyek.objects.all()
+    for obj in objectAll:
+        if projectB.Valid_time_start > obj.Valid_time_start:
+            if not obj.Nama in save:
+                save.append(obj.Nama)
+                ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
+    return JsonResponse({ 'data' : ans })
+    
 def getAnswer10():
     ans = []
     save = []
@@ -106,6 +143,18 @@ def getAnswer10():
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
 
+def getAnswer12():
+    ans = []
+    save = []
+    projectB = Proyek.objects.get(Id_proyek=13)
+    objectAll = Proyek.objects.all()
+    for obj in objectAll:
+        if projectB.Valid_time_start > obj.Valid_time_start and projectB.Valid_time_end == obj.Valid_time_end:
+            if not obj.Nama in save:
+                save.append(obj.Nama)
+                ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
+    return JsonResponse({ 'data' : ans })
+    
 def getAnswer14():
     ans = []
     objectAnggota = Anggota.objects.all()
@@ -133,6 +182,18 @@ def getAnswer14():
     # cari tiap tuple di list apakah 
     return JsonResponse({ 'data' : ans2 })
 
+def getAnswer16():
+    ans = []
+    save = []
+    projectA = Proyek.objects.get(Id_proyek=20)
+    objectAll = Proyek.objects.all()
+    for obj in objectAll:
+        if projectA.Valid_time_start > obj.Valid_time_start and projectA.Valid_time_end > obj.Valid_time_end and projectA.Valid_time_start < obj.Valid_time_end:
+            if not obj.Nama in save:
+                save.append(obj.Nama)
+                ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
+    return JsonResponse({ 'data' : ans })
+    
 def getAnswer18():
     ans = []
     save = []
@@ -146,6 +207,18 @@ def getAnswer18():
                 ans.append({"Nama" : obj.Nama})
     return JsonResponse({ 'data' : ans })
 
+def getAnswer20():
+    ans = []
+    save = []
+    projectA = Proyek.objects.get(Id_proyek=9)
+    objectAll = Proyek.objects.all()
+    for obj in objectAll:
+        if projectA.Valid_time_start - timedelta(1) == obj.Valid_time_end:
+            if not obj.Nama in save:
+                save.append(obj.Nama)
+                ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
+    return JsonResponse({ 'data' : ans })
+    
 def getQuestion(id):
     question = [{
         "id" : 1,
@@ -185,7 +258,7 @@ def getQuestion(id):
     {
         "id" : 8,
         "Operasi" : "A before B", #8
-        "Pertanyaan" : "Apakah proyek A berjalan sebelum proyek B?"
+        "Pertanyaan" : "Apa saja proyek yang berjalan sebelum proyek B?"
     },
     {
         "id" : 9,
@@ -245,7 +318,7 @@ def getQuestion(id):
     {
         "id" : 20,
         "Operasi" : "A met-by B",
-        "Pertanyaan" : "Apakah sajakah proyek yang berakhir tepat setelah proyek A?"
+        "Pertanyaan" : "Apakah sajakah proyek yang berakhir tepat sebelum proyek A dimulai?"
     }
     ]
     return question[id - 1]
