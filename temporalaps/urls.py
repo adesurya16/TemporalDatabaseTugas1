@@ -8,4 +8,5 @@ urlpatterns = [
     path('query', views.inputquery, name="query"),
     path('about', views.showabout, name="about"),
     path('question/<int:id>', views.index, name="question"),
+    path('answer/<int:id>',views.answerquestion, name="answer"),
 ]

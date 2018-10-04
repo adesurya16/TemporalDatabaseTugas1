@@ -7,7 +7,8 @@
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
    
 </head>
 <body>
@@ -49,29 +50,164 @@
                 <!-- <p>The logo in the navbar is now a default Bootstrap feature in Bootstrap 4! Make sure to set the width and height of the logo within the HTML or with CSS. For best results, it's recommended that you use an SVG image as your logo.</p> -->
                     <h5 class="title"> List Pertanyaan Temporal Database</h5>
                     <div class="list-group"> 
-                        <a href="#" class="list-group-item">
-                            Question-1 Projection
+                        {% if id == 1 %}
+                          <a href="{% url 'question' 1 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 1 %}" class="list-group-item">                              
+                        {% endif %}
+                          Question-1 Projection 
                         </a>
-                        <a href="#" class="list-group-item active">
+
+                        {% if id == 2 %}
+                          <a href="{% url 'question' 2 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 2 %}" class="list-group-item">                              
+                        {% endif %}
                             Question-2 Selection
                         </a>
-                        <a href="#" class="list-group-item">
+                        
+                        {% if id == 3 %}
+                          <a href="{% url 'question' 3 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 3 %}" class="list-group-item">                              
+                        {% endif %}
                             Question-3 Union
                         </a>
-                        <a href="#" class="list-group-item">
+
+                        {% if id == 4 %}
+                          <a href="{% url 'question' 4 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 4 %}" class="list-group-item">                              
+                        {% endif %}
                             Question-4 Join
                         </a>
-                        <a href="#" class="list-group-item">
+
+                        {% if id == 5 %}
+                          <a href="{% url 'question' 5 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 5 %}" class="list-group-item">                              
+                        {% endif %}
                             Question-5 Differences
                         </a>
-                        <a href="#" class="list-group-item">
+
+                        {% if id == 6 %}
+                          <a href="{% url 'question' 6 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 6 %}" class="list-group-item">                              
+                        {% endif %}
                             Question-6 Transaction Timescale
                         </a>
-                        <a href="#" class="list-group-item">
+
+                        {% if id == 7 %}
+                          <a href="{% url 'question' 7 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 7 %}" class="list-group-item">                              
+                        {% endif %}
                             Question-7 Valid Timeslice
                         </a>
-                        <a href="#" class="list-group-item">
+
+                        {% if id == 8 %}
+                          <a href="{% url 'question' 8 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 8 %}" class="list-group-item">                              
+                        {% endif %}
                             Question-8 A before B
+                        </a>
+
+                        {% if id == 9 %}
+                          <a href="{% url 'question' 9 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 9 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-9 A overlaps B
+                        </a>
+                        
+                        {% if id == 10 %}
+                          <a href="{% url 'question' 10 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 10 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-10 A contains B
+                        </a>
+                        
+                        {% if id == 11 %}
+                          <a href="{% url 'question' 11 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 11 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-11 A starts B
+                        </a>
+
+                        {% if id == 12 %}
+                          <a href="{% url 'question' 12 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 12 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-12 A finished-by B
+                        </a>
+
+                        {% if id == 13 %}
+                          <a href="{% url 'question' 13 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 13 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-13 A meets B
+                        </a>
+
+                        {% if id == 14 %}
+                          <a href="{% url 'question' 14 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 14 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-14 A equal B
+                        </a>
+
+                        {% if id == 15 %}
+                          <a href="{% url 'question' 15 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 15 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-15 A after B
+                        </a>
+
+                        {% if id == 16 %}
+                          <a href="{% url 'question' 16 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 16 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-16 A overlapped-by B
+                        </a>
+
+                        {% if id == 17 %}
+                          <a href="{% url 'question' 17 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 17 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-17 A during B
+                        </a>
+                        
+                        {% if id == 18 %}
+                          <a href="{% url 'question' 18 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 18 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-18 A started-by B
+                        </a>
+                        
+                        {% if id == 19 %}
+                          <a href="{% url 'question' 19 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 19 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-19 A finished B
+                        </a>
+
+                        {% if id == 20 %}
+                          <a href="{% url 'question' 20 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 20 %}" class="list-group-item">                              
+                        {% endif %}
+                            Question-20 A met-by B
                         </a>
                     </div>
                 </div>
@@ -81,14 +217,16 @@
                 <div class="questionbox">
                         <div class="list-group">
                                 <li id="question" class="list-group-item">
+                                    <h4>Question - {{id}} {{Operasi}}</h4>
                                     Question : <br>
-                                    Siapa saja anggota IIT yang baru bergabung 5 tahun belakangan ini?
+                                    {{ Pertanyaan }}
                                 </li>
                             </div>
-                            <button id="resultbutton" type="button" class="btn btn-primary">See The Result!</button>    
+                            <div id="link" value="{% url 'answer' id %}"> </div>
+                            <button id="resultbutton" type="button" class="btn btn-primary" >See The Result!</button>    
                 </div>
-                <div class="resulttable">
-                        <table class="table table-striped">
+                <div class="resulttable" style="display:none">
+                        <!-- <table class="table table-striped">
                                 <thead>
                                   <tr>
                                     <th>A1</th>
@@ -113,7 +251,7 @@
                                     <td>july@example.com</td>
                                   </tr>
                                 </tbody>
-                              </table>
+                              </table> -->
                 </div>
             </div>
         </div>  
@@ -127,9 +265,33 @@
         </div>
         <!-- /.container -->
       </footer>
-
+      <!-- <script>
+        $(function (){
+            // var $url = "{% url 'answer' id %}";
+            // var $resulttable = $('.resulttable');
+            
+            $("#resultbutton").click(function(){
+              $(".resulttable").show("slow", function(){
+                console.log("api nav");
+                // $.ajax({
+                //   type : 'GET',
+                //   url : $url,
+                //   success : function(results){
+                //     $.each(results, function(i, result){
+                //       $resulttable.apppend("<li>" + result +"</li>");
+                //     });
+                //   },
+                //   error : function(results){
+                //       alert('error');
+                //   },
+                // });
+              });
+            }); 
+          });
+      </script> -->
       <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-      <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+      <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'js/question.js' %}"> </script>
 </body>
 </html>
 
