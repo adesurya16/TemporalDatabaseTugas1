@@ -209,6 +209,14 @@
                         {% endif %}
                             Question-20 A met-by B
                         </a>
+
+                        {% if id == 21 %}
+                          <a href="{% url 'question' 21 %}" class="list-group-item active">
+                        {% else %}
+                          <a href="{% url 'question' 21 %}" class="list-group-item">
+                        {% endif %}
+                            Question-21 Update b
+                        </a>
                     </div>
                 </div>
         </div>

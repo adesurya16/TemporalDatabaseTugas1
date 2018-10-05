@@ -18,13 +18,20 @@ def home(request):
 @csrf_exempt
 def insertAnggota(request):
     if request.method == 'POST':
+        ans = []
         # serializer = SnippetSerializer(data=request.data)
         # print(request.body)
         row = request.POST
         # print(data)
         p = Anggota(Nim = row.get('Nim'), Nama = row.get('Nama'), Alamat = row.get('Alamat'), Telepon = row.get('Telepon'), Email=row.get('Email'), Divisi=row.get('Divisi'))
         p.save()
-    return JsonResponse(row)
+    #return JsonResponse(row)
+    members = Anggota.objects.all()
+    for member in members:
+        ans.append(
+            {"NIM": member.Nim, "Nama": member.Nama})
+
+    return JsonResponse({"data": ans})
 
 def index(request, id):
     if id is None:
@@ -208,13 +215,14 @@ def getAnswer7():
     save = []
     ans = []
     objectsOfProyek = Proyek.objects.all()
-    datenow = datetime.date.now()
+    datenow = datetime.date.today()
     for obj in objectsOfProyek:
+        proj = obj
         if datenow > obj.Valid_time_start and datenow < obj.Valid_time_end:
-            proj = obj.Id_proyek
-            if not proj.Nama in save :
-                save.append(proj.Nama)
-                ans.append({"Nama Proyek": proj['Nama'], "Valid_time_start" : proj.Valid_time_start, "Valid_time_end" : proj.Valid_time_end})    
+            #proj = obj.Id_proyek
+            #if not proj.Nama in save:
+                #save.append(proj.Nama)
+            ans.append({"Nama Proyek": proj.Nama, "Valid_time_start" : proj.Valid_time_start, "Valid_time_end" : proj.Valid_time_end})
     return JsonResponse({ "data" : ans })
 
 def getAnswer8():
@@ -317,14 +325,16 @@ def getAnswer14():
 def getAnswer15():
     save = []
     ans = []
+    #saveTime = []
     project15 = Proyek.objects.get(Id_proyek=17)
     objectsOfProyek = Proyek.objects.all()
     for obj in objectsOfProyek:
-        if  project15.Valid_time_end - obj.Valid_time_start == 2 :
+        #saveTime.append(datetime.combine(datetime.date.today(), project15.Valid_time_end) - datetime.combine(datetime.date.today(), obj.Valid_time_start))
+        if obj.Valid_time_start - timedelta(2) == project15.Valid_time_end:
             if not obj.Nama in save :
                 save.append(obj.Nama)
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
-    return JsonResponse({ 'data' : ans })
+    return JsonResponse({ 'data' : ans})
 
 def getAnswer16():
     ans = []
@@ -358,7 +368,7 @@ def getAnswer18():
         if object10.Valid_time_start < obj.Valid_time_start and object10.Valid_time_end > obj.Valid_time_end:
             if not obj.Nama in save:
                 save.append(obj.Nama)
-                ans.append({"Nama" : obj.Nama})
+                ans.append({"Nama" : obj.Nama, "Valid_time_start": obj.Valid_time_start, "Valid_time_end": obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
 
 def getAnswer19():
@@ -367,7 +377,7 @@ def getAnswer19():
     object19 = Proyek.objects.get(Id_proyek=10)
     print(object19)
     objectsOfProyek = Proyek.objects.all()
-    print(objectofProyek)
+    #print(objectofProyek)
     for obj in objectsOfProyek:
         if obj.Valid_time_start > object19.Valid_time_start and obj.Valid_time_end == object19.Valid_time_end:
             if not obj.Nama in save :
@@ -487,6 +497,11 @@ def getQuestion(id):
         "id" : 20,
         "Operasi" : "A met-by B",
         "Pertanyaan" : "Apakah sajakah proyek yang berakhir tepat sebelum proyek 'Mobil Listrik' dimulai?"
+    },
+    {
+        "id": 21,
+        "Operasi": "Update",
+        "Pertanyaan": "Update batas waktu proyek 'Geofisika KIB 1' menjadi hari ini!"
     }
     ]
     return question[id - 1]
