@@ -124,13 +124,13 @@ def getAnswer3():
     save = []
     ans = []
     objectsOfClient = Client.objects.all()
-    objectsOfAnggota = Anggota.object.all()
+    objectsOfAnggota = Anggota.objects.all()
     for objClient in objectsOfClient:
         for objAnggota in objectsOfAnggota:
             if objClient.Nama == objAnggota.Nama:
                 if not objClient.Nama in save:
-                    save.append(objAnggota.Nama)
-                    ans.append({"NIM" : objAnggota.NIM, "Nama Anggota IIT" : objAnggota.Nama})
+                    save.append(objClient.Nama)
+                    ans.append({"NIM" : objAnggota.Nim, "Nama Anggota IIT" : objAnggota.Nama})
     return JsonResponse({ "data" : ans })
 
 def getAnswer4():
@@ -223,9 +223,7 @@ def getAnswer11():
     save = []
     ans = []
     object11 = Proyek.objects.get(Id_proyek=8)
-    print(object10)
     objectsOfProyek = Proyek.object.all()
-    print(objectofProyek)
     for obj in objectsOfProyek:
         if obj.Valid_time_start == object11.Valid_time_start and obj.Valid_time_end < object11.Valid_time_end:
             if not obj.Nama in save :
@@ -393,27 +391,27 @@ def getQuestion(id):
     {
         "id" : 8,
         "Operasi" : "A before B", #8
-        "Pertanyaan" : "Apa saja proyek yang berjalan sebelum proyek B?"
+        "Pertanyaan" : "Apa saja proyek yang berjalan sebelum proyek 'Rekayasa stroberi'?"
     },
     {
         "id" : 9,
         "Operasi" : "A overlaps B", #9
-        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek Geofisika KIB 1 dimulai dan selesai antara rentang waktu proyek Geofisika KIB 1?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek 'Geofisika KIB 1' dimulai dan selesai antara rentang waktu proyek tersebut?"
     },
     {
         "id" : 10,
         "Operasi" : "A contains B", #10
-        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek 'Rekayasa stroberi' mulai dan selesai setelah proyek 'Rekayasa stroberi' selesai?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek 'Rekayasa stroberi' mulai dan selesai setelah proyek tersebut selesai?"
     },
     {
         "id" : 11,
         "Operasi" : "A starts B", #11
-        "Pertanyaan" : "Apa sajakah proyek yang mulai bersamaan dengan proyek 'Bibit Yogurt', tetapi selesai sebelum proyek 'Bibit Yogurt' berakhir?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai bersamaan dengan proyek 'Bibit Yogurt', tetapi selesai sebelum proyek tersebut berakhir?"
     },
     {
         "id" : 12,
         "Operasi" : "A finished-by B", #12
-        "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek B dimulai dan selesai bersamaan dengan proyek B?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek ‘Bahan Bakar Emisi’ dimulai dan selesai bersamaan dengan proyek tersebut?"
     },
     {
         "id" : 13,
@@ -433,27 +431,27 @@ def getQuestion(id):
     {
         "id" : 16,
         "Operasi" : "A overlapped-by B",
-        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek A dimulai dan  selesai antara rentang waktu proyek A?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek 'Pelabuhan Batam' dimulai dan  selesai antara rentang waktu proyek tersebut?"
     },
     {
         "id" : 17,
         "Operasi" : "A during B",
-        "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek Geofisika KIB 1 dimulai dan berakhir sebelum proyek tersebut selesai?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek 'Geofisika KIB 1' dimulai dan berakhir sebelum proyek tersebut selesai?"
     },
     {
         "id" : 18,
         "Operasi" : "A started-by B",
-        "Pertanyaan" : "Apa sajakah proyek yang mulai bersamaan dengan proyek 'Rekayasa Pinus' tetapi selesai setelah proyek 'Rekayasa Pinus' berakhir?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai bersamaan dengan proyek 'Rekayasa Pinus' tetapi selesai setelah proyek tersebut berakhir?"
     },
     {
         "id" : 19,
         "Operasi" : "A finished B",
-         "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek 'Jembatan SS' dimulai dan berakhir bersamaan dengan proyek 'Jembatan SS'?"
+         "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek 'Jembatan SS' dimulai dan berakhir bersamaan dengan proyek tersebut?"
     },
     {
         "id" : 20,
         "Operasi" : "A met-by B",
-        "Pertanyaan" : "Apakah sajakah proyek yang berakhir tepat sebelum proyek A dimulai?"
+        "Pertanyaan" : "Apakah sajakah proyek yang berakhir tepat sebelum proyek 'Mobil Listrik' dimulai?"
     }
     ]
     return question[id - 1]
