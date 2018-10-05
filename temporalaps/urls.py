@@ -11,4 +11,6 @@ urlpatterns = [
     path('answer/<int:id>', views.answerquestion, name="answer"),
     path('project/<int:id>', views.insertProject, name="insert"),
     path('project/update/<int:id>', views.updateProject, name="update"),
+    path('answer/<int:id>',views.answerquestion, name="answer"),
+    path('insert/anggota', views.insertAnggota, name="insertanggota"),
 ]

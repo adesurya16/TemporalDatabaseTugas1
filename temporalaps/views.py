@@ -7,11 +7,24 @@ import datetime
 import time
 from datetime import timedelta
 from django.http.response import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
 # from rest_framework.response import Response
 
 # Create your views here.
 def home(request):
     return redirect(index, id = 1)
+
+@csrf_exempt
+def insertAnggota(request):
+    if request.method == 'POST':
+        # serializer = SnippetSerializer(data=request.data)
+        # print(request.body)
+        row = request.POST
+        # print(data)
+        p = Anggota(Nim = row.get('Nim'), Nama = row.get('Nama'), Alamat = row.get('Alamat'), Telepon = row.get('Telepon'), Email=row.get('Email'), Divisi=row.get('Divisi'))
+        p.save()
+    return JsonResponse(row)
 
 def index(request, id):
     if id is None:
@@ -244,7 +257,7 @@ def getAnswer11():
     save = []
     ans = []
     object11 = Proyek.objects.get(Id_proyek=8)
-    objectsOfProyek = Proyek.object.all()
+    objectsOfProyek = Proyek.objects.all()
     for obj in objectsOfProyek:
         if obj.Valid_time_start == object11.Valid_time_start and obj.Valid_time_end < object11.Valid_time_end:
             if not obj.Nama in save :
@@ -305,8 +318,9 @@ def getAnswer15():
     save = []
     ans = []
     project15 = Proyek.objects.get(Id_proyek=17)
+    objectsOfProyek = Proyek.objects.all()
     for obj in objectsOfProyek:
-        if obj.Valid_time_start == project15.Valid_time_end + 2 :
+        if  project15.Valid_time_end - obj.Valid_time_start == 2 :
             if not obj.Nama in save :
                 save.append(obj.Nama)
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
@@ -352,7 +366,7 @@ def getAnswer19():
     ans = []
     object19 = Proyek.objects.get(Id_proyek=10)
     print(object19)
-    objectsOfProyek = Proyek.object.all()
+    objectsOfProyek = Proyek.objects.all()
     print(objectofProyek)
     for obj in objectsOfProyek:
         if obj.Valid_time_start > object19.Valid_time_start and obj.Valid_time_end == object19.Valid_time_end:
