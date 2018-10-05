@@ -236,7 +236,7 @@ def getAnswer11():
     save = []
     ans = []
     object11 = Proyek.objects.get(Id_proyek=8)
-    objectsOfProyek = Proyek.object.all()
+    objectsOfProyek = Proyek.objects.all()
     for obj in objectsOfProyek:
         if obj.Valid_time_start == object11.Valid_time_start and obj.Valid_time_end < object11.Valid_time_end:
             if not obj.Nama in save :
@@ -297,7 +297,7 @@ def getAnswer15():
     save = []
     ans = []
     project15 = Proyek.objects.get(Id_proyek=17)
-    objectsOfProyek = Proyek.object.all()
+    objectsOfProyek = Proyek.objects.all()
     for obj in objectsOfProyek:
         if  project15.Valid_time_end - obj.Valid_time_start == 2 :
             if not obj.Nama in save :
@@ -345,7 +345,7 @@ def getAnswer19():
     ans = []
     object19 = Proyek.objects.get(Id_proyek=10)
     print(object19)
-    objectsOfProyek = Proyek.object.all()
+    objectsOfProyek = Proyek.objects.all()
     print(objectofProyek)
     for obj in objectsOfProyek:
         if obj.Valid_time_start > object19.Valid_time_start and obj.Valid_time_end == object19.Valid_time_end:
