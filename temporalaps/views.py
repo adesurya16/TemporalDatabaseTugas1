@@ -296,7 +296,14 @@ def getAnswer16():
     return JsonResponse({ 'data' : ans })
     
 def getAnswer17():
-    return {}
+    ans = []
+    projectB = Proyek.objects.get(Id_proyek=1)
+    projects = Proyek.objects.all()
+    for project in projects:
+        if (project.Valid_time_start > projectB.Valid_time_start and project.Valid_time_end < projectB.Valid_time_end):
+            ans.append(
+                    {"Nama Proyek": project.Nama, "Valid_time_start": project.Valid_time_start, "Valid_time_end": project.Valid_time_end})
+    return JsonResponse({'data': ans})
 
 def getAnswer18():
     ans = []
@@ -421,7 +428,7 @@ def getQuestion(id):
     {
         "id" : 17,
         "Operasi" : "A during B",
-        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek B selesai dan selesai setelah proyek B selesai?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek Geofisika KIB 1 dimulai dan berakhir sebelum proyek tersebut selesai?"
     },
     {
         "id" : 18,
