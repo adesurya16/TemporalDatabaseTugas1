@@ -46,14 +46,20 @@ def answerquestion(request, id):
         return getAnswer2()
     elif id == 4:
         return getAnswer4()
+    elif id == 5:
+        return getAnswer5()
     elif id == 6:
         return getAnswer6()
     elif id == 8:
         return getAnswer8()
+    elif id == 9:
+        return getAnswer9()
     elif id == 10:
         return getAnswer10()
     elif id == 12:
         return getAnswer12()
+    elif id == 13:
+        return getAnswer13()
     elif id == 14:
         return getAnswer14()
     elif id == 16:
@@ -66,7 +72,7 @@ def answerquestion(request, id):
         return JsonResponse([])
 
 def getAnswer1():
-    # print("Answer 1")
+    #print("Answer 1")
     save = []
     ans = []
     objectsOfProyek = Proyek.objects.all()
@@ -74,14 +80,16 @@ def getAnswer1():
     # datenow = datetime.date(time.strftime("%Y-%m-%d"))
     datenow = datetime.date.today()
     # print(datenow)
+    temp = ""
     for obj in objectsOfProyek:
         # print(obj.Valid_time_start, type(obj.Valid_time_start))
         if datenow > obj.Valid_time_start and datenow < obj.Valid_time_end:
             org = obj.Id_client
             if not org.Organisasi in save:
                 save.append(org.Organisasi)
-                ans.append({"Organisasi" : org.Organisasi, "Valid_time_start" : org.Valid_time_start, "Valid_time_end" : org.Valid_time_end})   
-    return JsonResponse({ "data" : ans })
+                ans.append({"Organisasi" : org.Organisasi, "Valid_time_start" : org.Valid_time_start, "Valid_time_end" : org.Valid_time_end})
+
+    return JsonResponse({ "data" : ans, "tes" : temp})
 
 def getAnswer2():
     save = []
@@ -114,6 +122,16 @@ def getAnswer4():
     print(ans)
     return JsonResponse({ "data" : ans })
 
+def getAnswer5():
+    ans = []
+    objectsOfClient = Client.objects.all()
+    objectsOfAnggota = Anggota.objects.all()
+    for client in objectsOfClient:
+        for anggota in objectsOfAnggota:
+            if (client.Nama == anggota.Nama):
+                ans.append({"Nama Client" : client.Nama, "Valid_time_start" : client.Valid_time_start , "Valid_time_end" : client.Valid_time_end})
+    return JsonResponse({"data": ans})
+
 def getAnswer6():
     return {}
 
@@ -128,7 +146,17 @@ def getAnswer8():
                 save.append(obj.Nama)
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
-    
+
+def getAnswer9():
+    ans = []
+    projects = Proyek.objects.all()
+    projectB = Proyek.objects.get(Id_proyek=1)
+    for project in projects:
+        #for projectB in projects:
+            if project.Valid_time_start < projectB.Valid_time_start and project.Valid_time_end < projectB.Valid_time_end:
+                ans.append({"Nama proyek" : project.Nama, "Valid_time_start" : project.Valid_time_start, "Valid_time_end" : project.Valid_time_end})
+    return JsonResponse({ 'data' : ans })
+
 def getAnswer10():
     ans = []
     save = []
@@ -154,7 +182,17 @@ def getAnswer12():
                 save.append(obj.Nama)
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
-    
+
+def getAnswer13():
+    ans = []
+    save = []
+    projectB = Proyek.objects.get(Id_proyek=3)
+    projects = Proyek.objects.all()
+    for project in projects:
+        if project.Valid_time_start == projectB.Valid_time_end:
+            ans.append({"Nama Proyek" : project.Nama, "Valid_time_start" : project.Valid_time_start, "Valid_time_end" : project.Valid_time_end})
+    return JsonResponse({ 'data' : ans })
+
 def getAnswer14():
     ans = []
     objectAnggota = Anggota.objects.all()
@@ -263,7 +301,7 @@ def getQuestion(id):
     {
         "id" : 9,
         "Operasi" : "A overlaps B", #9
-        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek B dimulai dan  selesai antara rentang waktu proyek B?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek Geofisika KIB 1 dimulai dan selesai antara rentang waktu proyek Geofisika KIB 1?"
     },
     {
         "id" : 10,
@@ -283,7 +321,7 @@ def getQuestion(id):
     {
         "id" : 13,
         "Operasi" : "A meets B",
-        "Pertanyaan" : "Apa sajakah proyek yang berjalan tepat setelah proyek A?"
+        "Pertanyaan" : "Apa sajakah proyek yang berjalan tepat setelah proyek Pengeboran Pantai Papua?"
     },
     {
         "id" : 14,
