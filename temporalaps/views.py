@@ -124,13 +124,13 @@ def getAnswer3():
     save = []
     ans = []
     objectsOfClient = Client.objects.all()
-    objectsOfAnggota = Anggota.object.all()
+    objectsOfAnggota = Anggota.objects.all()
     for objClient in objectsOfClient:
         for objAnggota in objectsOfAnggota:
             if objClient.Nama == objAnggota.Nama:
                 if not objClient.Nama in save:
-                    save.append(objAnggota.Nama)
-                    ans.append({"NIM" : objAnggota.NIM, "Nama Anggota IIT" : objAnggota.Nama})
+                    save.append(objClient.Nama)
+                    ans.append({"NIM" : objAnggota.Nim, "Nama Anggota IIT" : objAnggota.Nama})
     return JsonResponse({ "data" : ans })
 
 def getAnswer4():
@@ -158,7 +158,17 @@ def getAnswer5():
     return JsonResponse({"data": ans})
 
 def getAnswer6():
-    return {}
+    ans = []
+    objectsOfProyek = Proyek.objects.all()
+    datenow = datetime.date.today()
+    for project in objectsOfProyek:
+        if project.Valid_time_end < datenow:
+            instance = Proyek.objects.get(Id_proyek=project.Id_proyek)
+            instance.delete()
+        else:
+            ans.append({"Nama Proyek": project.Nama, "Valid_time_start": project.Valid_time_start,
+                            "Valid_time_end": project.Valid_time_end})
+    return JsonResponse({"data": ans})
 
 def getAnswer7():
     save = []
@@ -213,9 +223,7 @@ def getAnswer11():
     save = []
     ans = []
     object11 = Proyek.objects.get(Id_proyek=8)
-    print(object10)
     objectsOfProyek = Proyek.object.all()
-    print(objectofProyek)
     for obj in objectsOfProyek:
         if obj.Valid_time_start == object11.Valid_time_start and obj.Valid_time_end < object11.Valid_time_end:
             if not obj.Nama in save :
@@ -372,9 +380,9 @@ def getQuestion(id):
         "Pertanyaan" : "Siapa saja nama client yang tidak terdaftar sebagai anggota IIT?"
     },
     {
-        "id" : 6,
-        "Operasi" : "Transaction timeslice", #6
-        "Pertanyaan" : "Apa saja proyek yang diinput kemarin?"
+        "id": 6,
+        "Operasi": "Delete",  # 6
+        "Pertanyaan": "Hapus proyek yang berakhir kemaren!"
     },
     {
         "id" : 7,
