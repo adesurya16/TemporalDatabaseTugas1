@@ -25,6 +25,27 @@ def index(request, id):
     print(context)
     return render(request, template, context)
 
+def insertProject(request, id):
+    if request.method == 'POST':
+        return HttpResponse("POST")
+    else:
+        return HttpResponse("GET")
+
+def updateProject(request, id):
+
+    ans = []
+
+    proyek = Proyek.objects.get(Id_proyek=id) #Valid_time_start=datetime.date.today())
+    proyek.Valid_time_end = datetime.date.today()
+    proyek.save()
+
+    projects = Proyek.objects.all()
+    for project in projects:
+        ans.append(
+        {"Nama Proyek": project.Nama, "Valid_time_start": project.Valid_time_start, "Valid_time_end": project.Valid_time_end})
+
+    return JsonResponse({"data": ans})
+
 def showentity(request):
     return render(request, 'temporalaps/templates/temporalaps/er.html')
 
@@ -101,7 +122,7 @@ def getAnswer1():
                 save.append(org.Organisasi)
                 ans.append({"Organisasi" : org.Organisasi, "Valid_time_start" : org.Valid_time_start, "Valid_time_end" : org.Valid_time_end})
 
-    return JsonResponse({ "data" : ans, "tes" : temp})
+    return JsonResponse({"data" : ans})
 
 def getAnswer2():
     save = []
