@@ -44,22 +44,40 @@ def answerquestion(request, id):
         return getAnswer1()
     elif id == 2:
         return getAnswer2()
+    elif id == 3:
+        return getAnswer3()
     elif id == 4:
         return getAnswer4()
+    elif id == 5:
+        return getAnswer5()
     elif id == 6:
         return getAnswer6()
+    elif id == 7:
+        return getAnswer7()
     elif id == 8:
         return getAnswer8()
+    elif id == 9:
+        return getAnswer9()
     elif id == 10:
         return getAnswer10()
+    elif id == 11:
+        return getAnswer11()
     elif id == 12:
         return getAnswer12()
+    elif id == 13:
+        return getAnswer13()
     elif id == 14:
         return getAnswer14()
+    elif id == 15:
+        return getAnswer15()
     elif id == 16:
         return getAnswer16()
+    elif id == 17:
+        return getAnswer17()
     elif id == 18:
         return getAnswer18()
+    elif id == 19:
+        return getAnswer19()
     elif id == 20:
         return getAnswer20()
     else:
@@ -100,6 +118,19 @@ def getAnswer2():
                 ans.append({"Organisasi" : org.Organisasi, "Valid_time_start" : org.Valid_time_start, "Valid_time_end" : org.Valid_time_end})   
     return JsonResponse({ "data" : ans })
 
+def getAnswer3():
+    save = []
+    ans = []
+    objectsOfClient = Client.objects.all()
+    objectsOfAnggota = Anggota.object.all()
+    for objClient in objectsOfClient:
+        for objAnggota in objectsOfAnggota:
+            if objClient.Nama == objAnggota.Nama:
+                if not objClient.Nama in save:
+                    save.append(objAnggota.Nama)
+                    ans.append({"NIM" : objAnggota.NIM, "Nama Anggota IIT" : objAnggota.Nama})
+    return JsonResponse({ "data" : ans })
+
 def getAnswer4():
     save = []
     ans = []
@@ -114,8 +145,24 @@ def getAnswer4():
     print(ans)
     return JsonResponse({ "data" : ans })
 
+def getAnswer5():
+    return {}
+
 def getAnswer6():
     return {}
+
+def getAnswer7():
+    save = []
+    ans = []
+    objectsOfProyek = Proyek.objects.all()
+    datenow = datetime.date.now()
+    for obj in objectsOfProyek:
+        if datenow > obj.Valid_time_start and datenow < obj.Valid_time_end:
+            proj = obj.Id_proyek
+            if not proj.Nama in save :
+                save.append(proj.Nama)
+                ans.append({"Nama Proyek": proj['Nama'], "Valid_time_start" : proj.Valid_time_start, "Valid_time_end" : proj.Valid_time_end})    
+    return JsonResponse({ "data" : ans })
 
 def getAnswer8():
     ans = []
@@ -129,6 +176,9 @@ def getAnswer8():
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
     
+def getAnswer9():
+    return {}
+
 def getAnswer10():
     ans = []
     save = []
@@ -139,6 +189,20 @@ def getAnswer10():
     for obj in objectAll:
         if object10.Valid_time_start < obj.Valid_time_start and object10.Valid_time_end > obj.Valid_time_end:
             if not obj.Nama in save:
+                save.append(obj.Nama)
+                ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
+    return JsonResponse({ 'data' : ans })
+
+def getAnswer11():
+    save = []
+    ans = []
+    object11 = Proyek.objects.get(Id_proyek=8)
+    print(object10)
+    objectsOfProyek = Proyek.object.all()
+    print(objectofProyek)
+    for obj in objectsOfProyek:
+        if obj.Valid_time_start == object11.Valid_time_start and obj.Valid_time_end < object11.Valid_time_end:
+            if not obj.Nama in save :
                 save.append(obj.Nama)
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
@@ -155,6 +219,9 @@ def getAnswer12():
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
     
+def getAnswer13():
+    return {}
+
 def getAnswer14():
     ans = []
     objectAnggota = Anggota.objects.all()
@@ -182,6 +249,17 @@ def getAnswer14():
     # cari tiap tuple di list apakah 
     return JsonResponse({ 'data' : ans2 })
 
+def getAnswer15():
+    save = []
+    ans = []
+    project15 = Proyek.objects.get(Id_proyek=17)
+    for obj in objectsOfProyek:
+        if obj.Valid_time_start == project15.Valid_time_end + 2 :
+            if not obj.Nama in save :
+                save.append(obj.Nama)
+                ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
+    return JsonResponse({ 'data' : ans })
+
 def getAnswer16():
     ans = []
     save = []
@@ -194,6 +272,9 @@ def getAnswer16():
                 ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
     
+def getAnswer17():
+    return {}
+
 def getAnswer18():
     ans = []
     save = []
@@ -205,6 +286,20 @@ def getAnswer18():
             if not obj.Nama in save:
                 save.append(obj.Nama)
                 ans.append({"Nama" : obj.Nama})
+    return JsonResponse({ 'data' : ans })
+
+def getAnswer19():
+    save = []
+    ans = []
+    object19 = Proyek.objects.get(Id_proyek=10)
+    print(object19)
+    objectsOfProyek = Proyek.object.all()
+    print(objectofProyek)
+    for obj in objectsOfProyek:
+        if obj.Valid_time_start > object19.Valid_time_start and obj.Valid_time_end == object19.Valid_time_end:
+            if not obj.Nama in save :
+                save.append(obj.Nama)
+                ans.append({"Nama" : obj.Nama, "Valid_time_start" : obj.Valid_time_start, "Valid_time_end" : obj.Valid_time_end})
     return JsonResponse({ 'data' : ans })
 
 def getAnswer20():
@@ -263,7 +358,7 @@ def getQuestion(id):
     {
         "id" : 9,
         "Operasi" : "A overlaps B", #9
-        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek B dimulai dan  selesai antara rentang waktu proyek B?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai sebelum proyek B dimulai dan selesai antara rentang waktu proyek B?"
     },
     {
         "id" : 10,
@@ -273,7 +368,7 @@ def getQuestion(id):
     {
         "id" : 11,
         "Operasi" : "A starts B", #11
-        "Pertanyaan" : "Apa sajakah proyek yang mulai bersamaan dengan proyek B, tetapi selesai sebelum proyek B berakhir?"
+        "Pertanyaan" : "Apa sajakah proyek yang mulai bersamaan dengan proyek 'Bibit Yogurt', tetapi selesai sebelum proyek 'Bibit Yogurt' berakhir?"
     },
     {
         "id" : 12,
@@ -293,7 +388,7 @@ def getQuestion(id):
     {
         "id" : 15,
         "Operasi" : "A after B",
-        "Pertanyaan" : "Apa sajakah proyek yang berjalan dua hari setelah proyek B selesai?"
+        "Pertanyaan" : "Apa sajakah proyek yang berjalan dua hari setelah proyek 'Penyuluhan Wirausaha' selesai?"
     },
     {
         "id" : 16,
@@ -313,7 +408,7 @@ def getQuestion(id):
     {
         "id" : 19,
         "Operasi" : "A finished B",
-        "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek B dimulai dan berakhir bersamaan dengan proyek B?"
+         "Pertanyaan" : "Apa sajakah proyek yang mulai setelah proyek 'Jembatan SS' dimulai dan berakhir bersamaan dengan proyek 'Jembatan SS'?"
     },
     {
         "id" : 20,
